@@ -1,6 +1,6 @@
 # D2X DevOps Assignment
 
-## Part 1 — Observability Setup (Kubernetes + Prometheus + Grafana)
+## Part 1  Observability Setup (Kubernetes + Prometheus + Grafana)
 
 ### Overview
 
@@ -134,7 +134,7 @@ Docker Desktop requires macOS 14 (Sonoma) or later. My machine runs macOS 12.7.6
 **3. Colima/qemu dependency failure**
 Colima was attempted as a Docker Desktop alternative. However, it depends on `qemu`, which has a broken `gnutls` dependency (`z3` formula) on macOS 12. Multiple install attempts failed with `FormulaUnavailableError`.
 
-**4. Solution — Minikube with HyperKit**
+**4. Solution Minikube with HyperKit**
 Minikube with the HyperKit driver was the viable path. HyperKit is a lightweight hypervisor for macOS that does not require Docker or qemu. This allowed the Kubernetes cluster to run successfully on the hardware.
 
 **5. NGINX metrics not visible in Grafana**
@@ -155,7 +155,7 @@ resources:
 
 ---
 
-### Alerting — How to Alert When a Pod Exceeds 80% CPU
+### Alerting  How to Alert When a Pod Exceeds 80% CPU
 
 To alert when a pod exceeds 80% CPU usage, a `PrometheusRule` resource would be created in the cluster. This defines the alert condition using PromQL (Prometheus Query Language):
 
@@ -182,7 +182,7 @@ This alert fires when a pod's CPU usage rate exceeds 80% for more than 1 minute.
 
 ---
 
-## Part 2 — Python Data Exercise
+## Part 2  Python Data Exercise
 
 ### Overview
 
@@ -231,12 +231,12 @@ Results are returned as formatted JSON. Example:
 
 ### Dataset
 
-Source: [NYC Open Data — Popular Baby Names](https://data.cityofnewyork.us/resource/25th-nujf.json)
+Source: [NYC Open Data - Popular Baby Names](https://data.cityofnewyork.us/resource/25th-nujf.json)
 
 ### References
 
-- [Claude AI](https://claude.ai/) - Used for finding workarounds for compatibility issues, understanding DevOps concepts, guidance through setup process and drafting this ReadME.
-- [Youtube - Kubernetes Concepts](https://www.youtube.com/watch?v=E2pP1MOfo3g)
+- [Claude AI](https://claude.ai/)  Used for finding workarounds for compatibility issues, understanding DevOps concepts, guidance through setup process and drafting this ReadME.
+- [Youtube  Kubernetes Concepts](https://www.youtube.com/watch?v=E2pP1MOfo3g)
 - [Pandas Filter Guide](https://builtin.com/data-science/pandas-filter)
-- [NYC Open data - Baby Names API](https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf/data_preview)
+- [NYC Open data  Baby Names API](https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf/data_preview)
 - [Python Requests JSON Example](https://reqbin.com/code/python/rituxo3j/python-requests-json-example#:~:text=To%20request%20JSON%20data%20from,JSON%20decoding%20fails%2C%20then%20response.)
