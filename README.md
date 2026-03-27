@@ -107,7 +107,7 @@ The `kube-prometheus-stack` Helm chart comes with pre-built dashboards. The foll
 
 Screenshots of each dashboard are included in the repository.
 
-#### Interview dashboard (custom)
+#### UPDATE refractored dashboard (custom)
 
 This repo also includes a custom, interview-focused Grafana dashboard JSON:
 
@@ -199,6 +199,7 @@ This alert fires when a pod's CPU usage rate exceeds 80% for more than 1 minute.
 ### Overview
 
 A Python script that fetches the New York State Baby Names dataset from the NYC Open Data API and answers three questions about the data.
+refactored into a reusable get_top_names() function accepting gender, year range and limit as parameters. replacing the orginal separate male/female functions. Also supports command lime arguments via argpase.
 
 ### Requirements
 
