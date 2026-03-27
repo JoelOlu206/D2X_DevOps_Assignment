@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: interview-email
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  route:
+    groupBy: ["alertname", "namespace"]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: email-joel
+  receivers:
+    - name: email-joel
+      emailConfigs:
+        - to: oludarejoel2006@gmail.com
+          from: oludarejoel2006@gmail.com
+          smarthost: smtp.gmail.com:587
+          authUsername: oludarejoel2006@gmail.com
+          authPassword:
+            name: alertmanager-email-secret
+            key: password
+          requireTLS: true
+

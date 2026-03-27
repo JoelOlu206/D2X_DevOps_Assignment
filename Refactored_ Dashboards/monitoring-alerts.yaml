@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: interview-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: interview.rules
+      rules:
+        - alert: KubePodNotRunning
+          expr: sum by (namespace, pod, phase) (kube_pod_status_phase{phase=~"Pending|Failed|Unknown"} == 1) > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod not running ({{ $labels.namespace }}/{{ $labels.pod }})"
+            description: "Pod is in {{ $labels.phase }} for more than 5 minutes."
+
+        - alert: KubePodHighRestartRate
+          expr: sum by (namespace, pod) (increase(kube_pod_container_status_restarts_total[10m])) >= 3
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High pod restart rate ({{ $labels.namespace }}/{{ $labels.pod }})"
+            description: "Pod restarted >= 3 times in the last 10 minutes (sustained for 5 minutes)."
+
+        - alert: NginxExporterDown
+          expr: absent(nginx_up{namespace="default"})
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "NGINX exporter metrics missing"
+            description: "No nginx_up series found in namespace default for 2 minutes (exporter/pod likely down or scaled to zero)."
+

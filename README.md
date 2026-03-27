@@ -107,6 +107,18 @@ The `kube-prometheus-stack` Helm chart comes with pre-built dashboards. The foll
 
 Screenshots of each dashboard are included in the repository.
 
+#### Interview dashboard (custom)
+
+This repo also includes a custom, interview-focused Grafana dashboard JSON:
+
+- `nginx-k8s-interview-dashboard.json` — NGINX + Kubernetes overview (health, saturation, workloads, NGINX traffic/pressure)
+
+To import it in Grafana:
+
+1. In Grafana, go to **Dashboards → New → Import**
+2. Upload `nginx-k8s-interview-dashboard.json`
+3. Select your Prometheus datasource (it defaults to a datasource named `prometheus`)
+
 ---
 
 ### To Resume the Environment
