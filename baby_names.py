@@ -16,39 +16,28 @@ def Get_NYC_Baby_Names():
     return data_frame
 
 
-#Returns top 5 male names for given year.
-def top_5_male_names(year):
+#handles any gender over any single or range of given years.
+def top_names_by_gender(gender, start_year, end_year):
     df = Get_NYC_Baby_Names()
-    male = df[df['gndr'] == 'MALE']
+    gender_df = df[df['gndr'] == gender.upper()]
     
-    #converts to int
-    male_yr = male[male['brth_yr'] == str(year)]
-    male_yr['cnt'] = male_yr['cnt'].astype(int)    
-
-    #removes duplicates
-    male_yr = male_yr.groupby('nm')['cnt'].sum().reset_index()
-    top_5_male = male_yr.nlargest(5, 'cnt')
+    gender_yr = gender_df[gender_df['brth_yr'].isin([str(year) for year in range(start_year, end_year + 1)])]
+    gender_yr = gender_yr.copy()
+    gender_yr['cnt'] = gender_yr['cnt'].astype(int)
     
-    #tolist() for cleaner output
-    return top_5_male['nm'].tolist()
+    gender_yr = gender_yr.groupby('nm')['cnt'].sum().reset_index()
+    top_5 = gender_yr.nlargest(5, 'cnt')
+    
+    return top_5['nm'].tolist()
 
+
+#Returns top 5 male names for single or given year.
+def top_5_male_names(year):
+    return top_names_by_gender('MALE', year, year)
 
 #Returns top 5 female names between two given years
 def top_female_names(start_year, end_year):
-    df = Get_NYC_Baby_Names()
-    female = df[df['gndr'] == 'FEMALE'] 
-
-
-
-    female_yr = female[female['brth_yr'].isin ([str(year) for year in range(start_year, end_year + 1)])]
-    female_yr['cnt'] = female_yr['cnt'].astype(int)
-
-
-    female_yr = female_yr.groupby('nm')['cnt'].sum().reset_index()
-    top_5_female = female_yr.nlargest(5, 'cnt')
-    
-    
-    return top_5_female['nm'].tolist()
+    return top_names_by_gender('FEMALE', start_year, end_year)
 
 
 #Returns the most popular name overall
@@ -73,9 +62,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.function == "male":
-        print(json.dumps(top_5_male_names(args.year), indent=5))
+       year = args.year or args.start_year
+       end = args.end_year or args.year
+       print(json.dumps(top_names_by_gender('MALE', year, end), indent=5))
+
     elif args.function == "female":
         print(json.dumps(top_female_names(args.start_year, args.end_year), indent=5))
+
     elif args.function == "overall":
         print(json.dumps(top_name_overall(), indent=5))
     
