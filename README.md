@@ -1,6 +1,6 @@
 # Kubernetes Observability Stack
 
-## Part 1  Observability Setup (Kubernetes + Prometheus + Grafana)
+## Observability Setup (Kubernetes + Prometheus + Grafana)
 
 ### Overview
 
@@ -14,7 +14,7 @@ Minikube - Local Kubernetes cluster
 HyperKit - VM driver for Minikube on macOS 
 kubectl - Command line tool to interact with the cluster 
 Helm - Package manager for Kubernetes 
-kube,prometheus,stack Helm chart that deploys Prometheus and Grafana together 
+kube-prometheus-stack Helm chart that deploys Prometheus and Grafana together 
 Prometheus Scrapes and stores the metrics from pods 
 Grafana Visualises the metrics as dashboards 
 
@@ -53,7 +53,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 ```
 
-#### 4. Deploy kube,prometheus,stack
+#### 4. Deploy kube-prometheus-stack
 
 ```bash
 helm install monitoring prometheus-community/kube-prometheus-stack \
@@ -125,7 +125,7 @@ Then open **http://localhost:3000**.
 ### Challenges Faced
 
 **1. Usage of AI**
-when i faced issues with compatibilty or unfamiliar tools, i used AI as assistance to find workarounds and to understand concepts. For example, identifying HyperKIT as a viable Minikube driver for macOS 12 after Docker Desktop and Colima both failed. Solutions were all verified and executed manually.
+When I faced issues with compatibilty or unfamiliar tools, i used AI as assistance to find workarounds and to understand concepts. For example, identifying HyperKIT as a viable Minikube driver for macOS 12 after Docker Desktop and Colima both failed. Solutions were all verified and executed manually.
 
 
 **2. Docker Desktop incompatibility**
