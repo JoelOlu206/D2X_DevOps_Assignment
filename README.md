@@ -1,4 +1,4 @@
-# D2X DevOps Assignment
+# Kubernetes Observability Stack
 
 ## Part 1  Observability Setup (Kubernetes + Prometheus + Grafana)
 
@@ -107,18 +107,6 @@ The `kube-prometheus-stack` Helm chart comes with pre-built dashboards. The foll
 
 Screenshots of each dashboard are included in the repository.
 
-#### UPDATE refractored dashboard (custom)
-
-This repo also includes a custom, interview-focused Grafana dashboard JSON:
-
-- `nginx-k8s-interview-dashboard.json` — NGINX + Kubernetes overview (health, saturation, workloads, NGINX traffic/pressure)
-
-To import it in Grafana:
-
-1. In Grafana, go to **Dashboards → New → Import**
-2. Upload `nginx-k8s-interview-dashboard.json`
-3. Select your Prometheus datasource (it defaults to a datasource named `prometheus`)
-
 ---
 
 ### To Resume the Environment
@@ -194,62 +182,9 @@ This alert fires when a pod's CPU usage rate exceeds 80% for more than 1 minute.
 
 ---
 
-## Part 2  Python Data Exercise
 
-### Overview
-
-A Python script that fetches the New York State Baby Names dataset from the NYC Open Data API and answers three questions about the data.
-refactored into a reusable get_top_names() function accepting gender, year range and limit as parameters. replacing the orginal separate male/female functions. Also supports command lime arguments via argpase.
-
-### Requirements
-
-```bash
-pip3 install pandas requests
-```
-
-### Usage
-
-```bash
-# Top 5 male names for a given year
-python3 baby_names.py --function male --year 2020
-
-# Top female names across a year range
-python3 baby_names.py --function female --start_year 2018 --end_year 2020
-
-# Most common name overall
-python3 baby_names.py --function overall
-```
-
-### Functions
-
-| Function | Description |
-|----------|-------------|
-| `top_5_male_names(year)` | Returns top 5 male names for a given year |
-| `top_female_names(start_year, end_year)` | Returns top female names across a year range |
-| `top_name_overall()` | Returns the most common name in the entire dataset |
-
-### Output
-
-Results are returned as formatted JSON. Example:
-
-```json
-[
-  "Liam",
-  "Noah",
-  "Jacob",
-  "Ethan",
-  "Lucas"
-]
-```
-
-### Dataset
-
-Source: [NYC Open Data - Popular Baby Names](https://data.cityofnewyork.us/resource/25th-nujf.json)
 
 ### References
 
 - [Claude AI](https://claude.ai/)  Used for finding workarounds for compatibility issues, understanding DevOps concepts, guidance through setup process and drafting this ReadME.
 - [Youtube  Kubernetes Concepts](https://www.youtube.com/watch?v=E2pP1MOfo3g)
-- [Pandas Filter Guide](https://builtin.com/data-science/pandas-filter)
-- [NYC Open data  Baby Names API](https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf/data_preview)
-- [Python Requests JSON Example](https://reqbin.com/code/python/rituxo3j/python-requests-json-example#:~:text=To%20request%20JSON%20data%20from,JSON%20decoding%20fails%2C%20then%20response.)
